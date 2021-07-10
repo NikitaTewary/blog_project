@@ -1,52 +1,52 @@
+
+
+.aboutpad{
+  padding-top: 100px;
+  margin-top: 10px;
+  background-color: 'purple';
+
+}
+.margingive{
+  margin-top: 10px;
+}
 .techfont{
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5em;
   margin-bottom: 10px;
 }
 .postdate{
-  text-align: center;
-}
-.post-form{
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2em;
-}
-.form-post-title{
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  color: RED;
+  text=align: center;
 }
 .posttitle{
   font-family: 'Montserrat', sans-serif;
-  font-size: 6em;
+  font-size: 3em;
   text-align: center;
 }
-
 .postcontent{
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.5em;
 }
-
 .centerstage{
   margin-left: auto;
   margin-right: auto;
 }
 
+.context {
+    width: 100%;
+    position: absolute;
+    top:50vh;
+
+}
+
+.context h1{
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
 .btn-comment{
   position: absolute;
   right: 0px;
-}
-
-.bigbrand{
-  font-size: 1.5em;
-}
-
-
-/*COLOR CHANGER*/
-/*Credit and Source: http://codepen.io/thapliyalshivam/pen/dvgXVO*/
-.loader{
-  filter:hue-rotate(0deg);
-  color: linear-gradient(45deg,#0f8,#08f);
-  animation:hue 5000ms infinite linear;
 }
 .area{
     background: #85d8ce;
@@ -154,6 +154,11 @@
     animation-duration: 11s;
 }
 
+.loader{
+  filter:hue-rotate(0deg);
+  color: linear-gradient(45deg,#0f8,#08f);
+  animation:hue 5000ms infinite linear;
+}
 @keyframes spinify {
   0% {
     transform: translate(0px,0px);
@@ -183,6 +188,8 @@
   100%{filter:hue-rotate(360deg);}
 
 }
+
+
 @keyframes animate {
 
     0%{
