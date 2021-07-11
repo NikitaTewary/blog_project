@@ -15,6 +15,7 @@
         {% endif %}
 
       <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
+      <p>Posted by: <strong>{{ post.author }}</strong></p>
 
 
       {% if user.is_authenticated %}

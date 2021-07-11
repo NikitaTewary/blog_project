@@ -25,18 +25,21 @@
 
 
 
-<body class='loader area '>
+<body class='loader area'>
 
+  <nav class="navbar navbar-default navbar-inverse techfont custom-navbar">
 
-  <nav class="navbar navbar-default techfont custom-navbar">
     <div class="container">
 
 
+
       <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">My blog</a></li>
+        <li><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">Blog</a></li>
         <li><a href="{% url 'about'%}">About</a></li>
         <li><a href="https://www.github.com">Github</a></li>
         <li><a href="https://www.linkedin.com">LinkedIn</a></li>
+        <li><a href="{% url 'register'%}">Registration</a></li>
+
 
       </ul>
 
@@ -62,6 +65,7 @@
 
       </ul>
   </div>
+
 </nav>
 
   {# The actual blog posts#}
@@ -70,6 +74,7 @@
                 <div class="col-md-8">
                   <div class="blog_posts">
                     {% block content %}
+
                     {% endblock %}
 
                   </div>

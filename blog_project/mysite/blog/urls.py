@@ -1,6 +1,5 @@
 from django.urls import path,include
 from blog import views
-
 urlpatterns = [
     path('',views.PostListView.as_view(),name='post_list'),
     path('about/',views.AboutView.as_view(),name='about'),
@@ -13,4 +12,6 @@ urlpatterns = [
     path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
+    path('register/',views.register,name='register'),
+    path('user_login/',views.user_login,name='user_login'),
 ]

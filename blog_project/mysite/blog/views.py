@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from blog.forms import UserForm,UserProfileInforForm
 from blog.models import Post, Comment
 from django.utils import timezone
 from blog.forms import PostForm, CommentForm
-
+from django.contrib.auth import authenticate,login,logout
 from django.views.generic import (TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
-
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy,reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class AboutView(TemplateView):
@@ -94,3 +95,67 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('post_detail', pk=post_pk)
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('register'))
+
+def register(request):
+
+    registered=False
+
+    if request.method=='POST':
+        user_form=UserForm(data=request.POST)
+        profile_form=UserProfileInforForm(data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user=user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile=profile_form.save(commit=False)
+            profile.user=user
+
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic=request.FILES['profile_pic']
+
+            profile.save()
+
+            registered=True
+
+        else:
+            print(user_form.errors,profile_form.errors)
+    else:
+        user_form=UserForm()
+        profile_form=UserProfileInforForm()
+
+    return render(request,'blog/registration.html',
+                            {'user_form':user_form,
+                              'profile_form':profile_form,
+                               'registered':registered})
+
+def user_login(request):
+
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(username=username,password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('index'))
+
+            else:
+                return HttpResponse('ACCOUNT NOT ACTIVE')
+
+        else:
+            print('someone tried to login and failed!')
+            print('username: {} and password {}'.format(username,password))
+            return HttpResponse('invalid login details supplied!')
+
+    else:
+        return render(request,'blog/login.html',{})
